@@ -1,0 +1,13 @@
+@import 'bootstrap/scss/bootstrap';
+
+:root {
+    --primary-color: #4f46e5;
+    --secondary-color: #6b7280;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f4f6;
+}
