@@ -20,7 +20,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
+        'avatar',
+        'is_online',
+        'last_seen_at',
     ];
 
     /**
@@ -42,7 +46,59 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'last_seen_at' => 'datetime',
+            'is_online' => 'boolean',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Get the user's avatar with fallback
+     */
+    public function getAvatarUrlAttribute(): string
+    {
+        if ($this->avatar) {
+            return asset('storage/' . $this->avatar);
+        }
+
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF';
+    }
+
+    /**
+     * Check if the user is online
+     */
+    public function isOnline(): bool
+    {
+        return $this->is_online;
+    }
+
+    /**
+     * Get the formatted status
+     */
+    public function getStatusAttribute(): string
+    {
+        if ($this->is_online) {
+            return 'En ligne';
+        }
+
+        if ($this->last_seen_at) {
+            return 'Vu ' . $this->last_seen_at->diffForHumans();
+        }
+
+        return 'Hors ligne';
+    }
+
+    /**
+     * Obtain the user's initials
+     */
+    public function getInitialsAttribute(): string
+    {
+        $words = explode(' ', $this->name);
+
+        if (count($words) >= 2) {
+            return strtoupper(substr($words[0], 0, 1) . substr($words[1], 0, 1));
+        }
+
+        return strtoupper(substr($this->name, 0, 2));
     }
 }

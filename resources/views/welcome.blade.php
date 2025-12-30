@@ -13,10 +13,10 @@
                     Une application de messagerie instantanée moderne et intuitive.
                 </p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <a href="#" class="btn btn-primary btn-lg px-4 me-md-2">
+                    <a href="{{ route('register') }}" class="btn btn-primary btn-lg px-4 me-md-2">
                         Commencer
                     </a>
-                    <a href="#" class="btn btn-outline-secondary btn-lg px-4">
+                    <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-lg px-4">
                         Se connecter
                     </a>
                 </div>

@@ -23,27 +23,38 @@
             <ul class="navbar-nav ms-auto">
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Connexion</a>
+                        <a class="nav-link" href="{{ route('login') }}">Connexion</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Inscription</a>
+                        <a class="nav-link" href="{{ route('register') }}">Inscription</a>
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Messages</a>
+                        <a class="nav-link" href="{{ route('chat.index') }}">Messages</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown">
+                            <img src="{{ Auth::user()->avatar_url }}"
+                                 alt="{{ Auth::user()->name }}"
+                                 class="rounded-circle me-1"
+                                 style="width: 30px; height: 30px; object-fit: cover;">
                             {{ Auth::user()->name }}
+                            @if(Auth::user()->isOnline())
+                                <span class="badge bg-success">●</span>
+                            @endif
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Profil</a></li>
+                            <li><a class="dropdown-item" href="{{ route('profile') }}">
+                                    <i class="bi bi-person"></i> Profil
+                                </a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <form action="#" method="POST">
+                                <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="dropdown-item">Déconnexion</button>
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        <i class="bi bi-box-arrow-right"></i> Déconnexion
+                                    </button>
                                 </form>
                             </li>
                         </ul>
