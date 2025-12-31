@@ -1,0 +1,87 @@
+.chat-container {
+    height: calc(100vh - 70px);
+    max-height: calc(100vh - 70px);
+}
+
+.messages-container {
+    height: calc(100vh - 250px);
+    overflow-y: auto;
+    background-image:
+        linear-gradient(45deg, #f8f9fa 25%, transparent 25%),
+        linear-gradient(-45deg, #f8f9fa 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f8f9fa 75%),
+        linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+}
+
+.conversation-item {
+    transition: background-color 0.2s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #f8f9fa !important;
+    }
+
+    &.active {
+        background-color: #e7f3ff !important;
+        border-left: 4px solid var(--bs-primary) !important;
+    }
+}
+
+.message-bubble {
+    border-radius: 18px !important;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-input-container {
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+    border-top: 1px solid #dee2e6;
+}
+
+.online-indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #10b981;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.user-search-item {
+    transition: background-color 0.2s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #f8f9fa;
+    }
+}
